@@ -1,0 +1,2 @@
+Copy-Item .\* "C:\Program Files (x86)\Steam\steamapps\common\Morrowind\Data Files" -Force -Exclude @(".gitignore", ".git", "deploy.ps1") -Recurse -Container 
+Remove-Item "C:\Program Files (x86)\Steam\steamapps\common\Morrowind\Data Files\MWSE\mods\Disenchant\core\" -Force -Recurse
