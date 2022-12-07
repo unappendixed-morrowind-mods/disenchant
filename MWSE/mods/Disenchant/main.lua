@@ -74,7 +74,6 @@ local function spawnCopy()
 
     local rat_position = target.position:copy()
     rat_position.z = rat_position.z - 100
-    mwse.log(type(rat))
     local copy = tes3.createReference({object = rat, position = rat_position, orientation = target.orientation, cell = target.cell})
     copy:disable()
     return copy
@@ -174,7 +173,6 @@ local function disenchantSucceed()
     )
     -- get generic version of object and spawn in place of target
     local obj = tes3.getObject(meshref[mesh_alt]) -- Shouldn't be able to crash game due to pcall test in disenchantTry body.
-    mwse.log(type(obj))
     local new_ref = tes3.createReference({object = obj, position = pos, orientation = orient, cell = pcell})
     if (condition ~= nil) then
         tes3.addItemData{to = new_ref}
@@ -185,7 +183,6 @@ end
 
 -- Called by filterSpell. All logic determining whether the target is valid and math to determine success or failure of disenchanting.
 local function disenchantTry()
-    mwse.log("version c")
     target = tes3.getPlayerTarget()
 
     -- Make sure we have a target.
@@ -390,14 +387,12 @@ end
 
 
 local function triggerDisenchant(e)
-    mwse.log(config.Keybind.keyCode)
     if (config == nil or config.Keybind == nil) then return end
     if (e.keyCode == config.Keybind.keyCode and 
         e.isAltDown == config.Keybind.isAltDown and 
         e.isControlDown ==  config.Keybind.isControlDown and 
         e.isShiftDown == config.Keybind.isShiftDown
         ) then
-    mwse.log("trying to play spellCast anim on player")
     local dummy = tes3.getObject("disenchant_dummy")
     if (tes3.getObject("disenchant_dummy") == nil) then
         dummy = tes3.getObject('Dispel'):createCopy{id = "disenchant_dummy"}
